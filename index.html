@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PS4 Exploit Host</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="home">
+<script>
+var histlength = history.length;
+</script>
+<main class="shell">
+<header class="hero">
+<p class="eyebrow">OFFLINE EXPLOIT HOST</p>
+<h1 id="msgs">PS4 Exploit Host</h1>
+<p class="subtitle">Choose the host that matches your console firmware.</p>
+</header>
+<div id=menu>
+<section class="firmware-panel" aria-labelledby="firmware-title">
+<div class="section-heading"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2 id="firmware-title">Select your firmware</h2></div><span class="status-dot">Offline ready</span></div>
+<div class="firmware-grid">
+<button class="btn btn-multi" data-message="Auto-select GoldHEN" onclick="location.replace('g2all/index.html')"><span>7.00 to 13.00</span><small>GoldHEN auto-select</small></button>
+<button class="btn" data-message="PS4 5.05 firmware host v2.5" onclick="location.replace('505/index.html')"><span>5.05</span><small>FW host</small></button>
+<a class="btn" data-message="PS4 6.72 firmware host v3.0" href="672/index.html"><span>6.72</span><small>FW host</small></a>
+<a class="btn" data-message="PS4 9.00 firmware host v3.0" href="900v3/index.html"><span>9.00</span><small>FW host</small></a>
+</div>
+<button class="btn btn-secondary" data-message="Restore a host to the User's Guide without using DNS" onclick="location.replace('restore/index.html')"><span>Restore host</span><small>Return to the User's Guide</small></button>
+</section>
+<p class="helper" aria-live="polite">Select a firmware above to begin.</p>
+<footer>Designed by thevoid9x</footer>
+</div>
+</main>
+<script>
+function routeForFirmware() {
+var match = navigator.userAgent.match(/PlayStation 4[ /]([\d.]+)/i);
+if (!match) return;
+var firmware = parseFloat(match[1]);
+var destination = null;
+if (firmware === 5.05 || firmware === 5.07) destination = "505/index.html";
+else if (firmware >= 6.70 && firmware <= 6.72) destination = "672/index.html";
+else if (firmware >= 9.00 && firmware <= 9.60) destination = "900v3/index.html";
+else destination = "g2all/index.html";
+if (destination) location.replace(destination);
+}
+
+routeForFirmware();
+
+document.querySelectorAll('[data-message]').forEach(function (control) {
+control.addEventListener('mouseenter', function () { document.getElementById('msgs').textContent = control.dataset.message; });
+control.addEventListener('mouseleave', function () { document.getElementById('msgs').textContent = 'PS4 Exploit Host'; });
+control.addEventListener('focus', function () { document.getElementById('msgs').textContent = control.dataset.message; });
+});
+</script>
+</body>
+</html>
